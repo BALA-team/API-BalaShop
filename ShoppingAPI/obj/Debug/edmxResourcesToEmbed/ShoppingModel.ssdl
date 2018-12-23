@@ -1,0 +1,103 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="shoppingDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="ShoppingProduct">
+    <Key>
+      <PropertyRef Name="ProductId" />
+    </Key>
+    <Property Name="ProductId" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="ProductName" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="ListId" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="IsBought" Type="bit" />
+  </EntityType>
+  <EntityType Name="ShopppingList">
+    <Key>
+      <PropertyRef Name="ListId" />
+    </Key>
+    <Property Name="ListId" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="ListName" Type="varchar" MaxLength="40" Nullable="false" />
+    <Property Name="Display" Type="bit" Nullable="false" />
+    <Property Name="IsSahred" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="principal_id" Type="int" Nullable="false" />
+    <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="version" Type="int" />
+    <Property Name="definition" Type="varbinary(max)" />
+  </EntityType>
+  <EntityType Name="User">
+    <Key>
+      <PropertyRef Name="UserId" />
+    </Key>
+    <Property Name="UserId" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="UserLogin" Type="varchar" MaxLength="25" Nullable="false" />
+    <Property Name="UserPassword" Type="varchar" MaxLength="25" Nullable="false" />
+    <Property Name="UserEmail" Type="varchar" MaxLength="40" Nullable="false" />
+  </EntityType>
+  <EntityType Name="UserList">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="UserId" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="ListId" Type="uniqueidentifier" Nullable="false" />
+  </EntityType>
+  <Association Name="FK_ListProduct">
+    <End Role="ShopppingList" Type="Self.ShopppingList" Multiplicity="1" />
+    <End Role="ShoppingProduct" Type="Self.ShoppingProduct" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ShopppingList">
+        <PropertyRef Name="ListId" />
+      </Principal>
+      <Dependent Role="ShoppingProduct">
+        <PropertyRef Name="ListId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ListToUserList">
+    <End Role="ShopppingList" Type="Self.ShopppingList" Multiplicity="1" />
+    <End Role="UserList" Type="Self.UserList" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ShopppingList">
+        <PropertyRef Name="ListId" />
+      </Principal>
+      <Dependent Role="UserList">
+        <PropertyRef Name="ListId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_UserToUserList">
+    <End Role="User" Type="Self.User" Multiplicity="1" />
+    <End Role="UserList" Type="Self.UserList" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="UserId" />
+      </Principal>
+      <Dependent Role="UserList">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="shoppingDBModelStoreContainer">
+    <EntitySet Name="ShoppingProduct" EntityType="Self.ShoppingProduct" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ShopppingList" EntityType="Self.ShopppingList" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="UserList" EntityType="Self.UserList" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_ListProduct" Association="Self.FK_ListProduct">
+      <End Role="ShopppingList" EntitySet="ShopppingList" />
+      <End Role="ShoppingProduct" EntitySet="ShoppingProduct" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ListToUserList" Association="Self.FK_ListToUserList">
+      <End Role="ShopppingList" EntitySet="ShopppingList" />
+      <End Role="UserList" EntitySet="UserList" />
+    </AssociationSet>
+    <AssociationSet Name="FK_UserToUserList" Association="Self.FK_UserToUserList">
+      <End Role="User" EntitySet="User" />
+      <End Role="UserList" EntitySet="UserList" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

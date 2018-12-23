@@ -1,0 +1,10 @@
+C:\Users\maciej.szostak\Desktop\Projekt zespołowy\ShoppingAPI\ShoppingAPI\bin\ShoppingAPI.dll.config
+C:\Users\maciej.szostak\Desktop\Projekt zespołowy\ShoppingAPI\ShoppingAPI\bin\ShoppingAPI.dll
+C:\Users\maciej.szostak\Desktop\Projekt zespołowy\ShoppingAPI\ShoppingAPI\bin\ShoppingAPI.pdb
+C:\Users\maciej.szostak\Desktop\Projekt zespołowy\ShoppingAPI\ShoppingAPI\bin\EntityFramework.dll
+C:\Users\maciej.szostak\Desktop\Projekt zespołowy\ShoppingAPI\ShoppingAPI\bin\EntityFramework.SqlServer.dll
+C:\Users\maciej.szostak\Desktop\Projekt zespołowy\ShoppingAPI\ShoppingAPI\bin\EntityFramework.xml
+C:\Users\maciej.szostak\Desktop\Projekt zespołowy\ShoppingAPI\ShoppingAPI\bin\EntityFramework.SqlServer.xml
+C:\Users\maciej.szostak\Desktop\Projekt zespołowy\ShoppingAPI\ShoppingAPI\obj\Debug\ShoppingAPI.dll
+C:\Users\maciej.szostak\Desktop\Projekt zespołowy\ShoppingAPI\ShoppingAPI\obj\Debug\ShoppingAPI.pdb
+C:\Users\maciej.szostak\Desktop\Projekt zespołowy\ShoppingAPI\ShoppingAPI\obj\Debug\ShoppingAPI.csprojResolveAssemblyReference.cache

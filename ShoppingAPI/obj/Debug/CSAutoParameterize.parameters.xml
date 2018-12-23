@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<parameters>
+  <parameter name="ShoppingEntities-Web.config Connection String" description="ShoppingEntities Connection String used in web.config by the application to access the database." defaultValue="metadata=res://*/ShoppingModel.csdl|res://*/ShoppingModel.ssdl|res://*/ShoppingModel.msl;provider=System.Data.SqlClient;provider connection string=&quot;data source=PL-FNGGZM2\TAXISYSTEM;initial catalog=Shopping;integrated security=True;MultipleActiveResultSets=True;App=EntityFramework&quot;" tags="SqlConnectionString">
+    <parameterEntry kind="XmlFile" scope="C:\\Users\\maciej\.szostak\\Desktop\\Projekt\ zespołowy\\ShoppingAPI\\ShoppingAPI\\obj\\Debug\\Package\\PackageTmp\\Web\.config$" match="/configuration/connectionStrings/add[@name='ShoppingEntities']/@connectionString" />
+  </parameter>
+  <parameter name="shoppingDBEntities-Web.config Connection String" description="shoppingDBEntities Connection String used in web.config by the application to access the database." defaultValue="metadata=res://*/ShoppingModel.csdl|res://*/ShoppingModel.ssdl|res://*/ShoppingModel.msl;provider=System.Data.SqlClient;provider connection string=&quot;data source=shoppingdbpz.database.windows.net;initial catalog=shoppingDB;user id=mszostak;password=M@cieja1;MultipleActiveResultSets=True;App=EntityFramework&quot;" tags="SqlConnectionString">
+    <parameterEntry kind="XmlFile" scope="C:\\Users\\maciej\.szostak\\Desktop\\Projekt\ zespołowy\\ShoppingAPI\\ShoppingAPI\\obj\\Debug\\Package\\PackageTmp\\Web\.config$" match="/configuration/connectionStrings/add[@name='shoppingDBEntities']/@connectionString" />
+  </parameter>
+</parameters>

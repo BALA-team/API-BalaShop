@@ -1,0 +1,109 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="shoppingDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="ShoppingProduct">
+    <Key>
+      <PropertyRef Name="ProductId" />
+    </Key>
+    <Property Name="ProductId" Type="Guid" Nullable="false" />
+    <Property Name="ProductName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="ListId" Type="Guid" Nullable="false" />
+    <Property Name="IsBought" Type="Boolean" />
+    <NavigationProperty Name="ShopppingList" Relationship="Self.FK_ListProduct" FromRole="ShoppingProduct" ToRole="ShopppingList" />
+  </EntityType>
+  <EntityType Name="ShopppingList">
+    <Key>
+      <PropertyRef Name="ListId" />
+    </Key>
+    <Property Name="ListId" Type="Guid" Nullable="false" />
+    <Property Name="ListName" Type="String" MaxLength="40" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Display" Type="Boolean" Nullable="false" />
+    <Property Name="IsSahred" Type="Boolean" Nullable="false" />
+    <NavigationProperty Name="ShoppingProduct" Relationship="Self.FK_ListProduct" FromRole="ShopppingList" ToRole="ShoppingProduct" />
+    <NavigationProperty Name="UserList" Relationship="Self.FK_ListToUserList" FromRole="ShopppingList" ToRole="UserList" />
+  </EntityType>
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="principal_id" Type="Int32" Nullable="false" />
+    <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="version" Type="Int32" />
+    <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+  </EntityType>
+  <EntityType Name="User">
+    <Key>
+      <PropertyRef Name="UserId" />
+    </Key>
+    <Property Name="UserId" Type="Guid" Nullable="false" />
+    <Property Name="UserLogin" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="UserPassword" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="UserEmail" Type="String" MaxLength="40" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="UserList" Relationship="Self.FK_UserToUserList" FromRole="User" ToRole="UserList" />
+  </EntityType>
+  <EntityType Name="UserList">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Guid" Nullable="false" />
+    <Property Name="UserId" Type="Guid" Nullable="false" />
+    <Property Name="ListId" Type="Guid" Nullable="false" />
+    <NavigationProperty Name="ShopppingList" Relationship="Self.FK_ListToUserList" FromRole="UserList" ToRole="ShopppingList" />
+    <NavigationProperty Name="User" Relationship="Self.FK_UserToUserList" FromRole="UserList" ToRole="User" />
+  </EntityType>
+  <Association Name="FK_ListProduct">
+    <End Role="ShopppingList" Type="Self.ShopppingList" Multiplicity="1" />
+    <End Role="ShoppingProduct" Type="Self.ShoppingProduct" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ShopppingList">
+        <PropertyRef Name="ListId" />
+      </Principal>
+      <Dependent Role="ShoppingProduct">
+        <PropertyRef Name="ListId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ListToUserList">
+    <End Role="ShopppingList" Type="Self.ShopppingList" Multiplicity="1" />
+    <End Role="UserList" Type="Self.UserList" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ShopppingList">
+        <PropertyRef Name="ListId" />
+      </Principal>
+      <Dependent Role="UserList">
+        <PropertyRef Name="ListId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_UserToUserList">
+    <End Role="User" Type="Self.User" Multiplicity="1" />
+    <End Role="UserList" Type="Self.UserList" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="UserId" />
+      </Principal>
+      <Dependent Role="UserList">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="shoppingDBEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="ShoppingProduct" EntityType="Self.ShoppingProduct" />
+    <EntitySet Name="ShopppingList" EntityType="Self.ShopppingList" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
+    <EntitySet Name="User" EntityType="Self.User" />
+    <EntitySet Name="UserList" EntityType="Self.UserList" />
+    <AssociationSet Name="FK_ListProduct" Association="Self.FK_ListProduct">
+      <End Role="ShopppingList" EntitySet="ShopppingList" />
+      <End Role="ShoppingProduct" EntitySet="ShoppingProduct" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ListToUserList" Association="Self.FK_ListToUserList">
+      <End Role="ShopppingList" EntitySet="ShopppingList" />
+      <End Role="UserList" EntitySet="UserList" />
+    </AssociationSet>
+    <AssociationSet Name="FK_UserToUserList" Association="Self.FK_UserToUserList">
+      <End Role="User" EntitySet="User" />
+      <End Role="UserList" EntitySet="UserList" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>
